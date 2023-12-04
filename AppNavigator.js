@@ -15,12 +15,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import theme from './themes/Draftbit.js';
 import LinkingConfiguration from './LinkingConfiguration.js';
 
-import BlankScreen from './screens/BlankScreen';
 import CheckEstimationsScreen from './screens/CheckEstimationsScreen';
+import HelpAndSupportScreen from './screens/HelpAndSupportScreen';
+import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
 import RecipientAddressScreen from './screens/RecipientAddressScreen';
-import SendPackageScreen from './screens/SendPackageScreen';
-import TopUpScreen from './screens/TopUpScreen';
-import TrackOrderScreen from './screens/TrackOrderScreen';
+import ReferToFriendScreen from './screens/ReferToFriendScreen';
 import TrackingDetailsScreen from './screens/TrackingDetailsScreen';
 
 const Stack = createStackNavigator();
@@ -29,61 +29,74 @@ const Tab = createBottomTabNavigator();
 function BottomTabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="SendPackageScreen"
+      initialRouteName="HomeScreen"
       screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: theme.colors.appGreen,
+        headerRight: ({ tintColor }) => (
+          <View style={[styles.headerContainer, styles.headerContainerRight]}>
+            <Icon
+              name="FontAwesome/bell"
+              size={Platform.OS === 'ios' ? 21 : 24}
+              color={tintColor}
+              style={[styles.headerIcon, styles.headerIconRight]}
+            />
+          </View>
+        ),
+        headerShown: true,
+        tabBarActiveTintColor: theme.colors['Primary'],
         tabBarInactiveTintColor: theme.colors.textPlaceholder,
         tabBarLabelPosition: 'below-icon',
         tabBarStyle: { borderTopColor: 'transparent' },
       }}
     >
       <Tab.Screen
-        name="SendPackageScreen"
-        component={SendPackageScreen}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Icon
-              name="MaterialCommunityIcons/package-variant"
+              name="Ionicons/ios-home"
               size={25}
               color={
-                focused ? theme.colors.appGreen : theme.colors.textPlaceholder
+                focused ? theme.colors['Primary'] : theme.colors.textPlaceholder
               }
             />
           ),
-          title: 'Send Package',
+          tabBarLabel: 'Home',
+          title: 'Home',
         }}
       />
       <Tab.Screen
-        name="TrackOrderScreen"
-        component={TrackOrderScreen}
+        name="HelpAndSupportScreen"
+        component={HelpAndSupportScreen}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Icon
-              name="MaterialCommunityIcons/map-search-outline"
+              name="AntDesign/questioncircleo"
               size={25}
               color={
-                focused ? theme.colors.appGreen : theme.colors.textPlaceholder
+                focused ? theme.colors['Primary'] : theme.colors.textPlaceholder
               }
             />
           ),
-          title: 'Track Order',
+          tabBarLabel: 'Help',
+          title: 'Help & Support',
         }}
       />
       <Tab.Screen
-        name="TopUpScreen"
-        component={TopUpScreen}
+        name="ReferToFriendScreen"
+        component={ReferToFriendScreen}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Icon
-              name="MaterialIcons/attach-money"
+              name="Entypo/share"
               size={25}
               color={
-                focused ? theme.colors.appGreen : theme.colors.textPlaceholder
+                focused ? theme.colors['Primary'] : theme.colors.textPlaceholder
               }
             />
           ),
-          title: 'Top Up',
+          tabBarLabel: 'Refer a Friend',
+          title: 'Refer To Friend',
         }}
       />
       <Tab.Screen
@@ -93,23 +106,24 @@ function BottomTabNavigator() {
           headerRight: ({ tintColor }) => (
             <View style={[styles.headerContainer, styles.headerContainerRight]}>
               <Icon
-                name=""
+                name="FontAwesome/bell"
                 size={Platform.OS === 'ios' ? 21 : 24}
                 color={tintColor}
                 style={[styles.headerIcon, styles.headerIconRight]}
               />
             </View>
           ),
-          headerShown: false,
+          headerShown: true,
           tabBarIcon: ({ focused, color }) => (
             <Icon
-              name="Ionicons/md-cart-sharp"
+              name="Ionicons/settings-sharp"
               size={25}
               color={
-                focused ? theme.colors.appGreen : theme.colors.textPlaceholder
+                focused ? theme.colors['Primary'] : theme.colors.textPlaceholder
               }
             />
           ),
+          tabBarLabel: 'Settings',
           title: 'Check Estimations',
         }}
       />
@@ -142,7 +156,7 @@ export default function RootAppNavigator() {
   return (
     <NavigationContainer linking={LinkingConfiguration}>
       <Stack.Navigator
-        initialRouteName="BottomTabNavigator"
+        initialRouteName="LoginScreen"
         screenOptions={{
           headerBackImage: ({ tintColor }) => (
             <Icon
@@ -152,15 +166,26 @@ export default function RootAppNavigator() {
               style={[styles.headerIcon, styles.headerIconLeft]}
             />
           ),
-          headerTitle: 'Ship It',
-          headerTitleAlign: 'center',
+          headerRight: ({ tintColor }) => (
+            <View style={[styles.headerContainer, styles.headerContainerRight]}>
+              <Icon
+                name="FontAwesome/bell"
+                size={Platform.OS === 'ios' ? 21 : 24}
+                color={tintColor}
+                style={[styles.headerIcon, styles.headerIconRight]}
+              />
+            </View>
+          ),
+          headerShown: false,
+          headerTitleAlign: 'left',
+          headerTitleAllowFontScaling: true,
         }}
       >
         <Stack.Screen
-          name="BlankScreen"
-          component={BlankScreen}
+          name="LoginScreen"
+          component={LoginScreen}
           options={{
-            title: 'Blank',
+            title: 'Login',
           }}
         />
         <Stack.Screen
