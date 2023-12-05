@@ -826,7 +826,7 @@ const CheckEstimationsScreen = props => {
         <Button
           onPress={() => {
             try {
-              navigation.navigate('RecipientAddressScreen');
+              navigation.navigate('StackNavigator');
             } catch (err) {
               console.error(err);
             }

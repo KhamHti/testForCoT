@@ -53,3 +53,6 @@ export const H4Styles = theme =>
   StyleSheet.create({
     H4: { color: theme.colors.strong, fontSize: 16, fontWeight: 'bold' },
   });
+
+export const VStackStyles = theme =>
+  StyleSheet.create({ 'V Stack': { flexDirection: 'column' } });
