@@ -40,3 +40,16 @@ export const ButtonStyles = theme =>
       textAlign: 'center',
     },
   });
+
+export const DividerStyles = theme =>
+  StyleSheet.create({ Divider: { height: 1 } });
+
+export const H6Styles = theme =>
+  StyleSheet.create({
+    H6: { color: theme.colors.strong, fontSize: 10.72, fontWeight: 'bold' },
+  });
+
+export const H4Styles = theme =>
+  StyleSheet.create({
+    H4: { color: theme.colors.strong, fontSize: 16, fontWeight: 'bold' },
+  });

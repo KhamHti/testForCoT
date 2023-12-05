@@ -21,10 +21,25 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RecipientAddressScreen from './screens/RecipientAddressScreen';
 import ReferToFriendScreen from './screens/ReferToFriendScreen';
+import SettingsScreen from './screens/SettingsScreen';
 import TrackingDetailsScreen from './screens/TrackingDetailsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function AuthNavigator() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{
+          title: 'Login',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function BottomTabNavigator() {
   return (
@@ -54,7 +69,7 @@ function BottomTabNavigator() {
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Icon
-              name="Ionicons/ios-home"
+              name="AntDesign/home"
               size={25}
               color={
                 focused ? theme.colors['Primary'] : theme.colors.textPlaceholder
@@ -63,23 +78,6 @@ function BottomTabNavigator() {
           ),
           tabBarLabel: 'Home',
           title: 'Home',
-        }}
-      />
-      <Tab.Screen
-        name="HelpAndSupportScreen"
-        component={HelpAndSupportScreen}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <Icon
-              name="AntDesign/questioncircleo"
-              size={25}
-              color={
-                focused ? theme.colors['Primary'] : theme.colors.textPlaceholder
-              }
-            />
-          ),
-          tabBarLabel: 'Help',
-          title: 'Help & Support',
         }}
       />
       <Tab.Screen
@@ -100,23 +98,29 @@ function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="CheckEstimationsScreen"
-        component={CheckEstimationsScreen}
+        name="HelpAndSupportScreen"
+        component={HelpAndSupportScreen}
         options={{
-          headerRight: ({ tintColor }) => (
-            <View style={[styles.headerContainer, styles.headerContainerRight]}>
-              <Icon
-                name="FontAwesome/bell"
-                size={Platform.OS === 'ios' ? 21 : 24}
-                color={tintColor}
-                style={[styles.headerIcon, styles.headerIconRight]}
-              />
-            </View>
-          ),
-          headerShown: true,
           tabBarIcon: ({ focused, color }) => (
             <Icon
-              name="Ionicons/settings-sharp"
+              name="AntDesign/questioncircleo"
+              size={25}
+              color={
+                focused ? theme.colors['Primary'] : theme.colors.textPlaceholder
+              }
+            />
+          ),
+          tabBarLabel: 'Help',
+          title: 'Help & Support',
+        }}
+      />
+      <Tab.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ focused, color }) => (
+            <Icon
+              name="Ionicons/ios-settings-outline"
               size={25}
               color={
                 focused ? theme.colors['Primary'] : theme.colors.textPlaceholder
@@ -124,7 +128,7 @@ function BottomTabNavigator() {
             />
           ),
           tabBarLabel: 'Settings',
-          title: 'Check Estimations',
+          title: 'Settings',
         }}
       />
     </Tab.Navigator>
@@ -156,7 +160,7 @@ export default function RootAppNavigator() {
   return (
     <NavigationContainer linking={LinkingConfiguration}>
       <Stack.Navigator
-        initialRouteName="LoginScreen"
+        initialRouteName="AuthNavigator"
         screenOptions={{
           headerBackImage: ({ tintColor }) => (
             <Icon
@@ -182,12 +186,13 @@ export default function RootAppNavigator() {
         }}
       >
         <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
+          name="CheckEstimationsScreen"
+          component={CheckEstimationsScreen}
           options={{
-            title: 'Login',
+            title: 'Check Estimations',
           }}
         />
+        <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
         <Stack.Screen
           name="BottomTabNavigator"
           component={BottomTabNavigator}
